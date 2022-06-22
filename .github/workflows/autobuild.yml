@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: AutoBuild
+
+# Controls when the workflow will run
+on:
+
+  watch:
+    types: [started]
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Fetch latest wsl kernel source
+        run: git clone https://github.com/microsoft/WSL2-Linux-Kernel .
+        
+      - name: Checkout
+        uses: actions/checkout@v3.0.1
+        with:
+          path: overlay
+        
+        
+      - name: Install build tool chain
+        run: sudo apt update && sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves -y
+      
+      - name: Enable drivers for anbox
+        run:  cp Microsoft/config-wsl .config && cat overlay/config-append >> .config
+      
+      - name: Build linux kernel
+        run: make
+      
+      - name: Get date
+        run: echo "date=$(date +'%m/%d_%Y_%H/%M')" >> $GITHUB_ENV
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          path: arch/x86/boot/bzImage
+      
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.REPO_TOKEN }}"
+          files: arch/x86/boot/bzImage  
+          prerelease: false
+          automatic_release_tag: ${{ env.date }}
+          
+
