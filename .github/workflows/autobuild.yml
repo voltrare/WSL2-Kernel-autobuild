@@ -32,9 +32,12 @@ jobs:
       - name: Install build tool chain
         run: sudo apt update && sudo apt install build-essential flex bison libssl-dev libelf-dev dwarves -y
       
-      - name: Enable drivers for anbox
-        run:  cp Microsoft/config-wsl .config && cat overlay/config-append >> .config
-      
+#      - name: Enable drivers for anbox
+#        run:  cp Microsoft/config-wsl .config && cat overlay/config-append >> .config
+
+      - name: edit conf
+        run:  cp overlay/config-append .config
+
       - name: Rename kernel
         run:  sed -i s#CONFIG_LOCALVERSION=\"-microsoft-standard-WSL2\"#CONFIG_LOCALVERSION=\"-microsoft-standard-WSL2-edited\"#g .config
       
