@@ -42,7 +42,7 @@ jobs:
         run:  sed -i s#CONFIG_LOCALVERSION=\"-microsoft-standard-WSL2\"#CONFIG_LOCALVERSION=\"-microsoft-standard-WSL2-edited\"#g .config
       
       - name: Build linux kernel
-        run: make
+        run: make -j $(expr $(nproc) - 1)
       
       - name: Get date
         run: echo "date=$(date +'%m/%d_%Y_%H/%M')" >> $GITHUB_ENV
