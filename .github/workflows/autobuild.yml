@@ -52,11 +52,11 @@ jobs:
         with:
           path: arch/x86/boot/bzImage
       
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.REPO_TOKEN }}"
-          files: arch/x86/boot/bzImage  
-          prerelease: false
-          automatic_release_tag: ${{ env.date }}
+#      - uses: "marvinpinto/action-automatic-releases@latest"
+#        with:
+#          repo_token: "${{ secrets.REPO_TOKEN }}"
+#          files: arch/x86/boot/bzImage  
+#          prerelease: false
+#          automatic_release_tag: ${{ env.date }}
           
 
