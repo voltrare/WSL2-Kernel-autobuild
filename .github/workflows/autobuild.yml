@@ -43,8 +43,9 @@ jobs:
       
       - name: Build linux kernel
         run: | 
-          expr $(nproc) - 1
-          make -j $(expr $(nproc) - 1)
+          make -j 128
+#          expr $(nproc) - 1
+#          make -j $(expr $(nproc) - 1)
       
       - name: Get date
         run: echo "date=$(date +'%m/%d_%Y_%H/%M')" >> $GITHUB_ENV
