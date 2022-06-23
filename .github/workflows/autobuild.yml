@@ -43,7 +43,7 @@ jobs:
       
       - name: Build linux kernel
         run: | 
-          expr $(nproc) - 1)
+          expr $(nproc) - 1
           make -j $(expr $(nproc) - 1)
       
       - name: Get date
