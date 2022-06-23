@@ -10,3 +10,4 @@
 - https://www.reddit.com/r/bashonubuntuonwindows/comments/eofn5s/run_anbox_on_wsl_2/
 - https://docs.darlinghq.org/wsl-build.html
 - https://github.com/microsoft/WSL/issues/5526
+- https://gist.github.com/xmesaj2/178dd22219d8503a5bee48dc59f9d0c6
