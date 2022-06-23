@@ -21,7 +21,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Fetch latest wsl kernel source
-        run: git clone https://github.com/microsoft/WSL2-Linux-Kernel .
+        run: git clone --depth 1 https://github.com/microsoft/WSL2-Linux-Kernel .
         
       - name: Checkout
         uses: actions/checkout@v3.0.1
